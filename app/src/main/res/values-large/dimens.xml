@@ -4,4 +4,13 @@
     <dimen name="fdl_card_form_row_height">105dp</dimen>
     <dimen name="fdl_card_form_row_tos_height">285dp</dimen>
     <dimen name="fdl_card_form_height">495dp</dimen>
+
+    <dimen name="fdl_card_form_row_item_left_spacing">30dp</dimen>
+    <dimen name="fdl_card_form_row_caption_top_spacing">17dp</dimen>
+    <dimen name="fdl_card_form_row_item_bottom_spacing">23dp</dimen>
+
+    <dimen name="fdl_card_form_row_item_card_width">63dp</dimen>
+    <dimen name="fdl_card_form_row_item_card_height">41dp</dimen>
+
+    <dimen name="fdl_card_form_caption_font_size">16sp</dimen>
 </resources>

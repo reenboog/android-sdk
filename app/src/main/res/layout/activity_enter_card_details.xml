@@ -7,7 +7,7 @@
     tools:context="com.fidel.fidel.EnterCardDetailsActivity">
 
         <ImageView
-            android:id="@+id/blocked_fragment_logo_image_view"
+            android:id="@+id/fdl_card_form_banner"
             android:layout_width="0dp"
             android:layout_height="@dimen/fdl_banner_height"
             android:layout_marginEnd="0dp"
@@ -23,7 +23,7 @@
             app:srcCompat="@drawable/fdl_banner" />
 
         <android.support.constraint.ConstraintLayout
-
+            android:background="#ffffff"
             android:id="@+id/fdl_card_form_layout"
             android:layout_width="0dp"
             android:layout_height="@dimen/fdl_card_form_height"
@@ -48,6 +48,35 @@
                 app:layout_constraintRight_toRightOf="parent"
                 tools:ignore="RtlHardcoded" />
 
+            <TextView
+                android:id="@+id/fdl_card_form_row_card_number_caption"
+                style="@style/FidelCardFormItemCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_item_left_spacing"
+                android:layout_marginTop="@dimen/fdl_card_form_row_caption_top_spacing"
+                android:text="Card Number"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_row_card_number_top_separator"/>
+
+            <ImageView
+                android:id="@+id/fdl_card_form_card"
+                android:layout_width="@dimen/fdl_card_form_row_item_card_width"
+                android:layout_height="@dimen/fdl_card_form_row_item_card_height"
+
+                android:layout_marginLeft="@dimen/fdl_card_form_row_item_left_spacing"
+
+
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="@dimen/fdl_card_form_row_item_bottom_spacing"
+                android:contentDescription="card"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"
+                app:srcCompat="@drawable/fdl_ic_card_unknown" />
+
             <View
                 android:id="@+id/fdl_card_form_row_card_number_bottom_separator"
                 style="@style/Divider.Horizontal"
@@ -60,6 +89,18 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/fdl_card_form_row_expiry_caption"
+                style="@style/FidelCardFormItemCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_item_left_spacing"
+                android:layout_marginTop="@dimen/fdl_card_form_row_caption_top_spacing"
+                android:text="Expiry Date"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"/>
 
             <View
                 android:id="@+id/fdl_card_form_row_expiry_to_country_separator"
@@ -74,6 +115,18 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/fdl_card_form_row_country_caption"
+                style="@style/FidelCardFormItemCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_item_left_spacing"
+                android:layout_marginTop="@dimen/fdl_card_form_row_caption_top_spacing"
+                android:text="Country"
+                app:layout_constraintLeft_toLeftOf="@+id/fdl_card_form_row_expiry_to_country_separator"
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"/>
 
             <View
                 android:id="@+id/fdl_card_form_row_tos_top_separator"
@@ -104,24 +157,24 @@
         </android.support.constraint.ConstraintLayout>
 
 
-        <EditText
-            android:id="@+id/edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
-            android:hint="Credit Card Number"
-            android:inputType="textNoSuggestions|phone"
-            android:maxLength="19"
-            android:maxLines="1"
-            android:theme="@style/CardEditTextTheme"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<EditText-->
+            <!--android:id="@+id/edit_text"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:drawablePadding="8dp"-->
+            <!--android:hint="Credit Card Number"-->
+            <!--android:inputType="textNoSuggestions|phone"-->
+            <!--android:maxLength="19"-->
+            <!--android:maxLines="1"-->
+            <!--android:theme="@style/FidelCardEditTextTheme"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </android.support.constraint.ConstraintLayout>
