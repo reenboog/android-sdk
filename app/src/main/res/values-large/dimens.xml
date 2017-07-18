@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fdl_banner_height">150dp</dimen>
+    <dimen name="fdl_card_form_row_height">105dp</dimen>
+    <dimen name="fdl_card_form_row_tos_height">285dp</dimen>
+    <dimen name="fdl_card_form_height">495dp</dimen>
+</resources>
