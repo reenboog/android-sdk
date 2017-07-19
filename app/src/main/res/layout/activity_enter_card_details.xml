@@ -71,11 +71,29 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="@dimen/fdl_card_form_row_item_bottom_spacing"
                 android:contentDescription="card"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 app:layout_constraintLeft_toLeftOf="parent"
 
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"
                 app:srcCompat="@drawable/fdl_ic_card_unknown" />
+
+            <ImageView
+                android:id="@+id/fdl_card_form_camera"
+                android:layout_width="@dimen/fdl_card_form_row_item_camera_width"
+                android:layout_height="@dimen/fdl_card_form_row_item_camera_height"
+
+                android:layout_marginRight="@dimen/fdl_card_form_row_item_right_spacing"
+
+
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:contentDescription="card"
+                android:scaleType="fitCenter"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_card"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_card"
+                app:srcCompat="@drawable/fdl_camera" />
 
             <View
                 android:id="@+id/fdl_card_form_row_card_number_bottom_separator"

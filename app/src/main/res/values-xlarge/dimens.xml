@@ -12,5 +12,8 @@
     <dimen name="fdl_card_form_row_item_card_width">84dp</dimen>
     <dimen name="fdl_card_form_row_item_card_height">54dp</dimen>
 
+    <dimen name="fdl_card_form_row_item_camera_width">75dp</dimen>
+    <dimen name="fdl_card_form_row_item_camera_height">48dp</dimen>
+
     <dimen name="fdl_card_form_caption_font_size">22sp</dimen>
 </resources>
