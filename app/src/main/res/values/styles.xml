@@ -64,6 +64,13 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="FidelCardFormBtnLinkTitle" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">@dimen/fdl_card_form_btn_link_title_font_size</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
 
 
     <style name="FidelCardFormInvalidItemCaption" parent="FidelCardFormItemCaption">

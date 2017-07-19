@@ -26,4 +26,8 @@
     <dimen name="fdl_card_form_tos_font_vertical_spacing">8sp</dimen>
 
     <dimen name="fdl_card_form_card_font_size">27sp</dimen>
+
+    <dimen name="fdl_card_form_btn_link_title_font_size">21sp</dimen>
+
+    <dimen name="fdl_card_form_row_item_btn_link_height">53dp</dimen>
 </resources>
