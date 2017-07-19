@@ -249,6 +249,66 @@
                 app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_tos_top_separator"
                 app:srcCompat="@drawable/fdl_checkbox" />
 
+            <TextView
+                android:id="@+id/fdl_card_form_tos_body_item"
+                style="@style/FidelCardFormTOS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_tos_left_spacing"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="0dp"
+                android:text="By accepting, I authorise Visa, Mastercard to monitor activity on my payment card to determine when I have made a qualifying transaction, and to share such details with Fidel to enable relevant card-linked offers. You may opt-out anytime by going to your settings. "
+                app:layout_constraintLeft_toRightOf="@id/fdl_card_form_tos_checkbox"
+                app:layout_constraintRight_toRightOf="@id/fdl_card_form_camera"
+
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_tos_checkbox"/>
+
+            <TextView
+                android:id="@+id/fdl_card_form_tos_terms_item"
+                style="@style/FidelCardFormTOSTerms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="@dimen/fdl_card_form_tos_font_vertical_spacing"
+                android:layout_marginRight="0dp"
+                android:text="Terms and Conditions"
+                app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_tos_body_item"
+
+
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_tos_body_item"/>
+
+            <TextView
+                android:id="@+id/fdl_card_form_tos_terms_and_item"
+                style="@style/FidelCardFormTOS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="0dp"
+                android:text=" and "
+                app:layout_constraintLeft_toRightOf="@id/fdl_card_form_tos_terms_item"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_tos_terms_item"/>
+
+            <TextView
+                android:id="@+id/fdl_card_form_tos_terms_privacy_item"
+                style="@style/FidelCardFormTOSTerms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="0dp"
+                android:text="Privacy Policy."
+                app:layout_constraintLeft_toRightOf="@id/fdl_card_form_tos_terms_and_item"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_tos_terms_and_item"/>
+
             <View
                 android:id="@+id/fdl_card_form_row_tos_bottom_separator"
                 style="@style/Divider.Horizontal"

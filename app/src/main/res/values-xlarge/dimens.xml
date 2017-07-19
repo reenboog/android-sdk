@@ -20,5 +20,10 @@
     <dimen name="fdl_card_form_row_item_camera_height">48dp</dimen>
 
     <dimen name="fdl_card_form_caption_font_size">22sp</dimen>
+
+    <dimen name="fdl_card_form_tos_font_size">24sp</dimen>
+
+    <dimen name="fdl_card_form_tos_font_vertical_spacing">10sp</dimen>
+
     <dimen name="fdl_card_form_card_font_size">40sp</dimen>
 </resources>

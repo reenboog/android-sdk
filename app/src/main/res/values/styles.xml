@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -53,6 +53,18 @@
         <item name="android:textStyle">normal</item>
         <item name="android:typeface">sans</item>
     </style>
+
+    <style name="FidelCardFormTOS" parent="FidelCardFormItemCaption">
+        <item name="android:textSize">@dimen/fdl_card_form_tos_font_size</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="FidelCardFormTOSTerms" parent="FidelCardFormTOS">
+        <item name="android:textSize">@dimen/fdl_card_form_tos_font_size</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+
 
     <style name="FidelCardFormInvalidItemCaption" parent="FidelCardFormItemCaption">
         <item name="android:textColor">#ff3b30</item>
