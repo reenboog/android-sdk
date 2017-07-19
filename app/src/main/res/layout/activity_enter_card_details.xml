@@ -77,6 +77,25 @@
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"
                 app:srcCompat="@drawable/fdl_ic_card_unknown" />
 
+            <EditText
+                android:id="@+id/fdl_card_form_card_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_card_left_spacing"
+                android:layout_marginRight="@dimen/fdl_card_form_row_card_right_spacing"
+                android:layout_marginTop="0dp"
+                android:drawablePadding="0dp"
+                android:hint="1234 0000 0000 0000"
+                android:inputType="textNoSuggestions|phone"
+                android:maxLength="19"
+                android:maxLines="1"
+                android:theme="@style/FidelCardEditTextTheme"
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_card"
+                app:layout_constraintLeft_toRightOf="@+id/fdl_card_form_card"
+                app:layout_constraintRight_toLeftOf="@+id/fdl_card_form_camera"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_card" />
+
             <ImageView
                 android:id="@+id/fdl_card_form_camera"
                 android:layout_width="@dimen/fdl_card_form_row_item_camera_width"
@@ -175,24 +194,7 @@
         </android.support.constraint.ConstraintLayout>
 
 
-        <!--<EditText-->
-            <!--android:id="@+id/edit_text"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:drawablePadding="8dp"-->
-            <!--android:hint="Credit Card Number"-->
-            <!--android:inputType="textNoSuggestions|phone"-->
-            <!--android:maxLength="19"-->
-            <!--android:maxLines="1"-->
-            <!--android:theme="@style/FidelCardEditTextTheme"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
 
 
 </android.support.constraint.ConstraintLayout>

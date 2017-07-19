@@ -9,6 +9,8 @@
     <dimen name="fdl_card_form_row_caption_top_spacing">22dp</dimen>
     <dimen name="fdl_card_form_row_item_bottom_spacing">30dp</dimen>
 
+    <dimen name="fdl_card_form_row_card_left_spacing">20dp</dimen>
+
     <dimen name="fdl_card_form_row_item_card_width">84dp</dimen>
     <dimen name="fdl_card_form_row_item_card_height">54dp</dimen>
 
@@ -16,4 +18,5 @@
     <dimen name="fdl_card_form_row_item_camera_height">48dp</dimen>
 
     <dimen name="fdl_card_form_caption_font_size">22sp</dimen>
+    <dimen name="fdl_card_form_card_font_size">40sp</dimen>
 </resources>

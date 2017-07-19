@@ -52,7 +52,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_card_details);
 
-        EditText editText = (EditText) findViewById(R.id.edit_text);
+        EditText editText = (EditText) findViewById(R.id.fdl_card_form_card_edit_text);
         editText.addTextChangedListener(new CreditCardTextWatcher(cardUtil) {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
