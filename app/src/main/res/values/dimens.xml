@@ -9,6 +9,8 @@
     <dimen name="fdl_card_form_row_item_left_spacing">20dp</dimen>
     <dimen name="fdl_card_form_row_item_right_spacing">@dimen/fdl_card_form_row_item_left_spacing</dimen>
 
+    <dimen name="fdl_card_form_row_item_tos_top_spacing">@dimen/fdl_card_form_row_item_left_spacing</dimen>
+
     <dimen name="fdl_card_form_row_card_left_spacing">10dp</dimen>
     <dimen name="fdl_card_form_row_card_right_spacing">@dimen/fdl_card_form_row_card_left_spacing</dimen>
 
@@ -19,6 +21,9 @@
 
     <dimen name="fdl_card_form_row_item_card_width">42dp</dimen>
     <dimen name="fdl_card_form_row_item_card_height">27dp</dimen>
+
+    <dimen name="fdl_card_form_row_item_checkbox_width">26dp</dimen>
+    <dimen name="fdl_card_form_row_item_checkbox_height">@dimen/fdl_card_form_row_item_checkbox_width</dimen>
 
     <dimen name="fdl_card_form_row_item_camera_width">37dp</dimen>
     <dimen name="fdl_card_form_row_item_camera_height">24dp</dimen>
