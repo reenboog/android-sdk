@@ -17,8 +17,8 @@
     <style name="FidelCardEditTextTheme">
         <!-- Used for the bottom line when not selected / focused -->
         <item name="colorControlNormal">#ffffff</item>
-        <item name="colorControlActivated">#da0000</item>
-        <item name="colorControlHighlight">#2eac2c</item>
+        <item name="colorControlActivated">#ffffff</item>
+        <item name="colorControlHighlight">#ffffff</item>
 
         <item name="android:textSize">@dimen/fdl_card_form_card_font_size</item>
         <item name="android:textColor">#000000</item>

@@ -359,17 +359,35 @@
 
 
             <ProgressBar
-                android:id="@+id/fdl_card_form_progress"
+                android:id="@+id/fdl_card_form_btn_link_progress"
                 android:theme="@style/ProgressLoader"
+                android:visibility="invisible"
                 android:layout_width="@dimen/fdl_card_form_row_item_progress_loader_width"
                 android:layout_height="@dimen/fdl_card_form_row_item_progress_loader_height"
 
 
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_btn_link_image_view"
-
                 app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_btn_link_image_view"
                 app:layout_constraintRight_toRightOf="@id/fdl_card_form_btn_link_image_view"
                 app:layout_constraintTop_toTopOf="@+id/fdl_card_form_btn_link_image_view" />
+
+            <ImageView
+                android:id="@+id/fdl_card_form_btn_link_checkbox"
+                android:layout_width="@dimen/fdl_card_form_row_item_checkbox_width"
+                android:layout_height="@dimen/fdl_card_form_row_item_checkbox_height"
+
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+
+                android:contentDescription="link button"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintRight_toRightOf="@id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_btn_link_image_view"
+                app:srcCompat="@drawable/fdl_checkbox_selected" />
 
         </android.support.constraint.ConstraintLayout>
 
