@@ -12,6 +12,8 @@
     <dimen name="fdl_card_form_row_card_left_spacing">10dp</dimen>
     <dimen name="fdl_card_form_row_card_right_spacing">@dimen/fdl_card_form_row_card_left_spacing</dimen>
 
+    <dimen name="fdl_card_form_row_invalid_item_left_spacing">@dimen/fdl_card_form_row_card_left_spacing</dimen>
+
     <dimen name="fdl_card_form_row_caption_top_spacing">11dp</dimen>
     <dimen name="fdl_card_form_row_item_bottom_spacing">15dp</dimen>
 

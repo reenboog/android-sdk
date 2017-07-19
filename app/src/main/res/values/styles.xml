@@ -40,4 +40,8 @@
         <item name="android:typeface">sans</item>
     </style>
 
+    <style name="FidelCardFormInvalidItemCaption" parent="FidelCardFormItemCaption">
+        <item name="android:textColor">#ff3b30</item>
+    </style>
+
 </resources>

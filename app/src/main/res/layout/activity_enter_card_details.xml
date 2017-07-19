@@ -49,6 +49,18 @@
                 tools:ignore="RtlHardcoded" />
 
             <TextView
+                android:id="@+id/fdl_card_form_row_card_number_invalid_caption"
+                style="@style/FidelCardFormInvalidItemCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_invalid_item_left_spacing"
+                android:layout_marginTop="0dp"
+                android:text="Invalid"
+                app:layout_constraintLeft_toRightOf="@+id/fdl_card_form_row_card_number_caption"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_row_card_number_caption"/>
+
+            <TextView
                 android:id="@+id/fdl_card_form_row_card_number_caption"
                 style="@style/FidelCardFormItemCaption"
                 android:layout_width="wrap_content"
@@ -138,6 +150,18 @@
                 android:text="Expiry Date"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"/>
+
+            <TextView
+                android:id="@+id/fdl_card_form_row_expiry_invalid_caption"
+                style="@style/FidelCardFormInvalidItemCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/fdl_card_form_row_invalid_item_left_spacing"
+                android:layout_marginTop="0dp"
+                android:text="Invalid"
+                app:layout_constraintLeft_toRightOf="@+id/fdl_card_form_row_expiry_caption"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_row_expiry_caption"/>
 
             <View
                 android:id="@+id/fdl_card_form_row_expiry_to_country_separator"
