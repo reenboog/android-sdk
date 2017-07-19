@@ -27,6 +27,14 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="FidelCardFormCountry" parent="FidelCardEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
+
+
     <style name="Divider">
         <item name="android:background">#969696</item>
     </style>

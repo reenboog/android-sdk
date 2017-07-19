@@ -208,6 +208,19 @@
                 app:layout_constraintLeft_toLeftOf="@+id/fdl_card_form_row_expiry_to_country_separator"
                 app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"/>
 
+            <TextView
+                android:id="@+id/fdl_card_form_row_country_item"
+                style="@style/FidelCardFormCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:text="Great Britain"
+                app:layout_constraintLeft_toLeftOf="@+id/fdl_card_form_row_country_caption"
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_expiry_edit_text"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_expiry_edit_text"/>
+
             <View
                 android:id="@+id/fdl_card_form_row_tos_top_separator"
                 style="@style/Divider.Horizontal"
