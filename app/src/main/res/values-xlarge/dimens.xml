@@ -21,6 +21,8 @@
 
     <dimen name="fdl_card_form_row_item_progress_loader_width">52dp</dimen>
 
+    <dimen name="fdl_card_form_logo_bottom_spacing">80dp</dimen>
+
     <dimen name="fdl_card_form_caption_font_size">22sp</dimen>
 
     <dimen name="fdl_card_form_tos_font_size">24sp</dimen>

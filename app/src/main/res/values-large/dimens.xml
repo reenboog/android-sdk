@@ -19,6 +19,8 @@
     <dimen name="fdl_card_form_row_item_camera_width">56dp</dimen>
     <dimen name="fdl_card_form_row_item_camera_height">36dp</dimen>
 
+    <dimen name="fdl_card_form_logo_bottom_spacing">60dp</dimen>
+
     <dimen name="fdl_card_form_row_item_progress_loader_width">39dp</dimen>
 
     <dimen name="fdl_card_form_caption_font_size">16sp</dimen>
