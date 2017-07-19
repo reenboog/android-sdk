@@ -342,6 +342,7 @@
             <TextView
                 android:id="@+id/fdl_card_form_btn_link_title"
                 style="@style/FidelCardFormBtnLinkTitle"
+                android:visibility="invisible"
                 android:textAlignment="center"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -356,7 +357,23 @@
                 app:layout_constraintTop_toTopOf="@+id/fdl_card_form_btn_link_image_view"
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_btn_link_image_view"/>
 
+
+            <ProgressBar
+                android:id="@+id/fdl_card_form_progress"
+                android:theme="@style/ProgressLoader"
+                android:layout_width="@dimen/fdl_card_form_row_item_progress_loader_width"
+                android:layout_height="@dimen/fdl_card_form_row_item_progress_loader_height"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_btn_link_image_view"
+
+                app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintRight_toRightOf="@id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintTop_toTopOf="@+id/fdl_card_form_btn_link_image_view" />
+
         </android.support.constraint.ConstraintLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

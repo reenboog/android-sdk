@@ -27,6 +27,9 @@
     <dimen name="fdl_card_form_row_item_checkbox_width">26dp</dimen>
     <dimen name="fdl_card_form_row_item_checkbox_height">@dimen/fdl_card_form_row_item_checkbox_width</dimen>
 
+    <dimen name="fdl_card_form_row_item_progress_loader_width">26dp</dimen>
+    <dimen name="fdl_card_form_row_item_progress_loader_height">@dimen/fdl_card_form_row_item_progress_loader_width</dimen>
+
     <dimen name="fdl_card_form_row_item_camera_width">37dp</dimen>
     <dimen name="fdl_card_form_row_item_camera_height">24dp</dimen>
 

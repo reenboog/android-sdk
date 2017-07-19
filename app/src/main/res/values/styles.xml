@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ProgressLoader" parent="AppTheme">
+
+        <item name="colorAccent">#ffffff</item>
+    </style>
+
+
     <style name="FidelCardEditTextTheme">
         <!-- Used for the bottom line when not selected / focused -->
         <item name="colorControlNormal">#ffffff</item>
