@@ -21,6 +21,12 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="FidelExpiryEditTextTheme" parent="FidelCardEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="android:padding">0dp</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
     <style name="Divider">
         <item name="android:background">#969696</item>
     </style>

@@ -151,6 +151,25 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_row_card_number_bottom_separator"/>
 
+            <EditText
+                android:id="@+id/fdl_card_form_expiry_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/fdl_card_form_row_item_bottom_spacing"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="0dp"
+                android:drawablePadding="0dp"
+                android:hint="MM / YY"
+                android:inputType="textNoSuggestions|phone"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:theme="@style/FidelExpiryEditTextTheme"
+
+                app:layout_constraintLeft_toLeftOf="@+id/fdl_card_form_row_expiry_caption"
+                app:layout_constraintRight_toLeftOf="@+id/fdl_card_form_row_expiry_to_country_separator"
+                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_row_tos_top_separator" />
+
             <TextView
                 android:id="@+id/fdl_card_form_row_expiry_invalid_caption"
                 style="@style/FidelCardFormInvalidItemCaption"
