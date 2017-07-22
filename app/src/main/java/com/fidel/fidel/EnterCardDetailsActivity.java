@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,6 +25,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     ImageView cardIconImageView;
 
     TextView invalidCardNumberTextView;
+    TextView invalidExpiryTextView;
 
     //
 
@@ -35,6 +37,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         //
         invalidCardNumberTextView = (TextView)findViewById(R.id.fdl_card_form_row_card_number_invalid_caption);
         invalidCardNumberTextView.setVisibility(View.INVISIBLE);
+
+        invalidExpiryTextView = (TextView)findViewById(R.id.fdl_card_form_row_expiry_invalid_caption);
+        invalidExpiryTextView.setVisibility(View.INVISIBLE);
 
         cardIconImageView = (ImageView)findViewById(R.id.fdl_card_form_card);
         //
@@ -85,7 +90,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(v == cardNumberEditText && hasFocus) {
-                    Log.d("d", "FOCUS On Card");
+
 
                     // todo: play animation here
                 }
@@ -99,7 +104,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(v == expiryEditText && hasFocus) {
-                    Log.d("d", "FOCUS On Expiry");
+
 
                     // todo: play animation here
                 }
@@ -113,10 +118,31 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
                     if(expiryEditText.getText().length() == 0) {
                         askForCardNumber();
+
                     }
                 }
 
                 return false;
+            }
+        });
+
+        expiryEditText.addTextChangedListener(new ExpiryDateTextWatcher(expiryEditText) {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+
+                if(s.length() == EXPIRY_TEXT_MAX_LENGTH) {
+                    if(!ExpiryDateUtil.isDateExpired(s.toString())) {
+
+                        askForCountry();
+
+                        invalidExpiryTextView.setVisibility(View.INVISIBLE);
+                    } else {
+                        invalidExpiryTextView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    invalidExpiryTextView.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -136,5 +162,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
     private void askForExpiry() {
         expiryEditText.requestFocus();
+    }
+
+    private void askForCountry() {
+        Log.d("d", "Valid date!");
     }
 }

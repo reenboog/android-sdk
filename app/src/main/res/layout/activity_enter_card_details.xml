@@ -179,8 +179,8 @@
                 android:layout_marginTop="0dp"
                 android:drawablePadding="0dp"
                 android:hint="MM / YY"
-                android:inputType="textNoSuggestions|phone"
-                android:maxLength="10"
+                android:inputType="textNoSuggestions|number"
+                android:maxLength="7"
                 android:maxLines="1"
                 android:theme="@style/FidelExpiryEditTextTheme"
 
