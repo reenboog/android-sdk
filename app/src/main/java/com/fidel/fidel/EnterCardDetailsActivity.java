@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +39,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     ImageView btnCamera;
 
     TextView countryTextView;
+
+    ImageView btnTOSCheckBox;
+    ImageView btnLinkCard;
 
     //
     @Override
@@ -204,6 +208,52 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         });
 
         //
+        btnLinkCard = (ImageView)findViewById(R.id.fdl_card_form_btn_link_image_view);
+
+        btnLinkCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((boolean)btnTOSCheckBox.getTag() == false) {
+                    return;
+                }
+
+                // todo: edit click listener
+                Log.d("", "LINKING");
+            }
+        });
+
+        //
+        btnTOSCheckBox = (ImageView)findViewById(R.id.fdl_card_form_tos_checkbox);
+
+        btnTOSCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!cardUtil.isCardReal(cardNumberEditText.getText())) {
+                    askForCardNumber();
+
+                    invalidCardNumberTextView.setVisibility(View.VISIBLE);
+
+                    return;
+                } else {
+                    if(ExpiryDateUtil.isDateExpired(expiryEditText.getText().toString())) {
+                        askForExpiry();
+
+                        invalidExpiryTextView.setVisibility(View.VISIBLE);
+
+                        return;
+                    }
+                }
+
+                slideCardFormBack();
+
+                boolean tag = (boolean)btnTOSCheckBox.getTag();
+
+                setBtnTosCheckBoxSelected(!tag);
+            }
+        });
+
+        setBtnTosCheckBoxSelected(false);
+        //
 
         setupToolBar();
 
@@ -236,6 +286,27 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setBtnLinkCardEnabled(boolean e) {
+        // todo: fix with tint color or image
+        if(e) {
+            btnLinkCard.setAlpha(1.0f);
+        } else {
+            btnLinkCard.setAlpha(0.5f);
+        }
+    }
+
+    private void setBtnTosCheckBoxSelected(boolean s) {
+        btnTOSCheckBox.setTag(s);
+
+        setBtnLinkCardEnabled(s);
+
+        if(s) {
+            btnTOSCheckBox.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fdl_checkbox_selected));
+        } else {
+            btnTOSCheckBox.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fdl_checkbox));
+        }
     }
 
     private void showCardIOActivity() {
@@ -281,5 +352,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
                 .positiveText("OK")
                 .negativeText("CANCEL")
                 .show();
+    }
+
+    private void slideCardFormBack() {
+
     }
 }

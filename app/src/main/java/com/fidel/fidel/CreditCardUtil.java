@@ -143,6 +143,10 @@ public class CreditCardUtil {
      * @return true if card is a valid card for creditCard
      */
     public static boolean validateCard(CharSequence card, CreditCard creditCard) {
+        if(creditCard == null) {
+            return false;
+        }
+
         String rawCard = clean(card);
 
         boolean result = creditCard.getVerifyPattern().matcher(rawCard).matches();
