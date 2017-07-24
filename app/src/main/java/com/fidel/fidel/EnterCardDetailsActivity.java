@@ -1,5 +1,6 @@
 package com.fidel.fidel;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import io.card.payment.CardIOActivity;
+
 public class EnterCardDetailsActivity extends AppCompatActivity {
+
+    private static final int FIDEL_SCAN_REQUEST_CODE = 2343;
 
     private CreditCard[] cards = new CreditCard[]{CreditCardUtil.VISA, CreditCardUtil.MASTERCARD, CreditCardUtil.UNKNOWN};
 
@@ -26,6 +31,31 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
     TextView invalidCardNumberTextView;
     TextView invalidExpiryTextView;
+
+    ImageView btnCamera;
+
+    //
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == FIDEL_SCAN_REQUEST_CODE) {
+            if(data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+                io.card.payment.CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+
+                String cardNumber = scanResult.cardNumber;
+                cardNumberEditText.setText(cardNumber);
+
+                String expiry = ExpiryDateUtil.expiryStringForMonthAndYear(scanResult.expiryMonth, scanResult.expiryYear);
+
+                expiryEditText.setText(expiry);
+            }
+            else {
+//                resultDisplayStr = "Scan was canceled.";
+            }
+
+        }
+    }
 
     //
 
@@ -42,6 +72,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         invalidExpiryTextView.setVisibility(View.INVISIBLE);
 
         cardIconImageView = (ImageView)findViewById(R.id.fdl_card_form_card);
+
         //
 
         cardNumberEditText = (EditText)findViewById(R.id.fdl_card_form_card_edit_text);
@@ -147,8 +178,31 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         });
 
         //
+
+        btnCamera = (ImageView)findViewById(R.id.fdl_card_form_camera);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCardIOActivity();
+            }
+        });
+
+        //
         askForCardNumber();
     }
+
+    private void showCardIOActivity() {
+        Intent scanIntent = new Intent(this, CardIOActivity.class);
+
+        // customize these values to suit your needs.
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+
+        // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
+        startActivityForResult(scanIntent, FIDEL_SCAN_REQUEST_CODE);
+    }
+
 
     //
     private void askForCardNumber() {

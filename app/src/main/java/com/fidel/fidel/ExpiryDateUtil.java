@@ -1,7 +1,5 @@
 package com.fidel.fidel;
 
-import android.text.format.DateUtils;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +14,9 @@ import java.util.regex.Pattern;
 
 public class ExpiryDateUtil {
     public static final String DATE_SPACE = " / ";
+    public static final String MONTH_ADDON = "0";
+
+    public static final int MILLENIUM_BASE = 2000;
 
     public static boolean isStringInValidFormat(String s) {
         Pattern datePattern = Pattern.compile("(^(0[1-9]|1[0-2]) / ([0-9]?[0-9]?))|(^(0[1-9]|1[0-2]) /?)|(^(0[1-9]?|1[0-2]?)$)");
@@ -23,6 +24,34 @@ public class ExpiryDateUtil {
         boolean match = datePattern.matcher(s).matches();
 
         return match;
+    }
+
+    public static String expiryStringForMonthAndYear(int month, int year) {
+        year = yearInTwoDigitFormat(year);
+
+        String expiry = monthNumericStringForMonth(month) + DATE_SPACE + year;
+
+        return expiry;
+    }
+
+    public static int yearInTwoDigitFormat(int year) {
+        if(year < 100) {
+            return year;
+        } else {
+            return year % MILLENIUM_BASE;
+        }
+    }
+
+    public static String monthNumericStringForMonth(int m) {
+        String month = "";
+
+        if(m < 10) {
+            month = MONTH_ADDON + m;
+        } else {
+            month = "" + m;
+        }
+
+        return month;
     }
 
     public static boolean isDateExpired(String s) {

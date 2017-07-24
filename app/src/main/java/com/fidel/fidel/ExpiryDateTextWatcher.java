@@ -12,7 +12,6 @@ public class ExpiryDateTextWatcher implements TextWatcher {
 
     public static final int EXPIRY_TEXT_MAX_LENGTH = 7;
 
-    private static final String MONTH_ADDON = "0";
     private EditText textEdit;
 
     private String lastValidString = "";
@@ -60,7 +59,7 @@ public class ExpiryDateTextWatcher implements TextWatcher {
                     int digit = Character.getNumericValue(ch);
 
                     if(digit > 1) {
-                        textEdit.setText(MONTH_ADDON + digit + ExpiryDateUtil.DATE_SPACE);
+                        textEdit.setText(ExpiryDateUtil.monthNumericStringForMonth(digit) + ExpiryDateUtil.DATE_SPACE);
                         syncLastValidString();
                     }
                 } else {
