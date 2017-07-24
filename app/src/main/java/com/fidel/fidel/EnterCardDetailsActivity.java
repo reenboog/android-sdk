@@ -3,11 +3,12 @@ package com.fidel.fidel;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -203,7 +204,38 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         });
 
         //
+
+        setupToolBar();
+
+        //
         askForCardNumber();
+    }
+
+    private void setupToolBar() {
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        Toolbar toolBar = (Toolbar)getLayoutInflater().inflate(R.layout.fdl_custom_toolbar, null);
+
+        ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.WRAP_CONTENT);
+
+        actionBar.setCustomView(toolBar, layout);
+
+        Toolbar parent = (Toolbar)toolBar.getParent();
+        parent.setContentInsetsAbsolute(0, 0);
+
+        ImageView btnDismiss = (ImageView)toolBar.findViewById(R.id.fdl_action_bar_btn_close);
+
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void showCardIOActivity() {

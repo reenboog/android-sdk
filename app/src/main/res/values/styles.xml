@@ -40,6 +40,13 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="FidelActionBarTitle" parent="@android:style/TextAppearance.Medium">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="android:textColor">#ffffff</item>
+
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
 
 
     <style name="Divider">
