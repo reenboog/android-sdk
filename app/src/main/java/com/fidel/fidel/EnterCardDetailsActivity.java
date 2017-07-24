@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import io.card.payment.CardIOActivity;
 
 public class EnterCardDetailsActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     TextView invalidExpiryTextView;
 
     ImageView btnCamera;
+
+    TextView countryTextView;
 
     //
     @Override
@@ -188,6 +192,17 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         });
 
         //
+        countryTextView = (TextView)findViewById(R.id.fdl_card_form_row_country_item);
+        countryTextView.setText(CountriesUtil.countryByIndex(0));
+
+        countryTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askForCountry();
+            }
+        });
+
+        //
         askForCardNumber();
     }
 
@@ -219,6 +234,20 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     }
 
     private void askForCountry() {
-        Log.d("d", "Valid date!");
+        new MaterialDialog.Builder(this)
+                .title("Choose your country")
+                .items(CountriesUtil.countries())
+                .itemsCallbackSingleChoice(CountriesUtil.indexForCountry(countryTextView.getText().toString()),
+                        new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        countryTextView.setText(text);
+
+                        return true;
+                    }
+                })
+                .positiveText("OK")
+                .negativeText("CANCEL")
+                .show();
     }
 }
