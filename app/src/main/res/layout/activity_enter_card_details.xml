@@ -409,7 +409,18 @@
 
         </android.support.constraint.ConstraintLayout>
 
+        <View android:id="@+id/fdl_card_form_input_blocker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:alpha="0.5"
 
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
 
+            app:layout_constraintTop_toTopOf="@+id/fdl_card_form_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_layout" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,8 +1,10 @@
 package com.fidel.fidel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +14,10 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -21,6 +25,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import io.card.payment.CardIOActivity;
 
 public class EnterCardDetailsActivity extends AppCompatActivity {
+
+    enum LinkButtonType {
+        LBT_LINK,
+        LBT_LOADER,
+        LBT_CHECK
+    }
 
     private static final int FIDEL_SCAN_REQUEST_CODE = 2343;
 
@@ -42,6 +52,12 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
     ImageView btnTOSCheckBox;
     ImageView btnLinkCard;
+
+    ProgressBar linkProgress;
+    ImageView linkMark;
+    TextView linkTitle;
+
+    View inputBlocker;
 
     //
     @Override
@@ -117,11 +133,15 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
                      if(cardUtil.isCardReal(s)) {
                          askForExpiry();
                      } else {
+                         disableTOSCheckbox();
+
                          if(cardUtil.validateCard(s)) {
                              // if it's a full length card, it means it does not comply to Luhn's algorithm
                              invalidCardNumberTextView.setVisibility(View.VISIBLE);
                          }
                      }
+                 } else {
+                     disableTOSCheckbox();
                  }
             }
         });
@@ -178,9 +198,13 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
                         invalidExpiryTextView.setVisibility(View.INVISIBLE);
                     } else {
+                        disableTOSCheckbox();
+
                         invalidExpiryTextView.setVisibility(View.VISIBLE);
                     }
                 } else {
+                    disableTOSCheckbox();
+
                     invalidExpiryTextView.setVisibility(View.INVISIBLE);
                 }
             }
@@ -192,6 +216,10 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disableTOSCheckbox();
+
+                resignAllFirstResponders();
+
                 showCardIOActivity();
             }
         });
@@ -216,6 +244,12 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
                 if((boolean)btnTOSCheckBox.getTag() == false) {
                     return;
                 }
+
+                resignAllFirstResponders();
+
+                blockInput();
+
+                setLinkButtonType(LinkButtonType.LBT_LOADER);
 
                 // todo: edit click listener
                 Log.d("", "LINKING");
@@ -248,14 +282,32 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
                 boolean tag = (boolean)btnTOSCheckBox.getTag();
 
-                setBtnTosCheckBoxSelected(!tag);
+                if(!tag) {
+                    resignAllFirstResponders();
+                }
+
+                setBtnTOSCheckBoxSelected(!tag);
             }
         });
 
-        setBtnTosCheckBoxSelected(false);
+        //
+        linkProgress = (ProgressBar)findViewById(R.id.fdl_card_form_btn_link_progress);
+        linkMark = (ImageView)findViewById(R.id.fdl_card_form_btn_link_checkbox);
+        linkTitle = (TextView)findViewById(R.id.fdl_card_form_btn_link_title);
+
+        setLinkButtonType(LinkButtonType.LBT_LINK);
+
+        //
+        inputBlocker = findViewById(R.id.fdl_card_form_input_blocker);
+
+        //
+
+        setBtnTOSCheckBoxSelected(false);
         //
 
         setupToolBar();
+
+        unblockInput();
 
         //
         askForCardNumber();
@@ -289,7 +341,6 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     }
 
     private void setBtnLinkCardEnabled(boolean e) {
-        // todo: fix with tint color or image
         if(e) {
             btnLinkCard.setAlpha(1.0f);
         } else {
@@ -297,8 +348,10 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void setBtnTosCheckBoxSelected(boolean s) {
+    private void setBtnTOSCheckBoxSelected(boolean s) {
         btnTOSCheckBox.setTag(s);
+
+        btnLinkCard.setClickable(s);
 
         setBtnLinkCardEnabled(s);
 
@@ -355,6 +408,67 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
     }
 
     private void slideCardFormBack() {
+        // todo: implement
+    }
 
+    private void setLinkButtonType(LinkButtonType type) {
+        linkMark.setVisibility(View.INVISIBLE);
+        linkTitle.setVisibility(View.INVISIBLE);
+        linkProgress.setVisibility(View.INVISIBLE);
+
+        switch(type) {
+            case LBT_LINK:
+                linkTitle.setVisibility(View.VISIBLE);
+                return;
+            case LBT_CHECK:
+                linkMark.setVisibility(View.VISIBLE);
+                return;
+            case LBT_LOADER:
+                linkProgress.setVisibility(View.VISIBLE);
+                return;
+        }
+    }
+
+    private void resignAllFirstResponders() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if(imm != null) {
+            View focus = getCurrentFocus();
+
+            if(focus != null) {
+                IBinder windowToken = focus.getWindowToken();
+
+                if(windowToken != null) {
+                    imm.hideSoftInputFromWindow(windowToken, 0);
+                }
+            }
+        }
+
+//        cardNumberEditText.clearFocus();
+//        expiryEditText.clearFocus();
+    }
+
+    private void blockInput() {
+        inputBlocker.setAlpha(0.5f);
+
+        inputBlocker.setClickable(true);
+
+        inputBlocker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resignAllFirstResponders();
+            }
+        });
+    }
+
+    private void unblockInput() {
+        inputBlocker.setAlpha(0.0f);
+
+        inputBlocker.setOnClickListener(null);
+        inputBlocker.setClickable(false);
+    }
+
+    private void disableTOSCheckbox() {
+        setBtnTOSCheckBoxSelected(false);
     }
 }
