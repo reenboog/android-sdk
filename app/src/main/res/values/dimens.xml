@@ -48,4 +48,7 @@
     <dimen name="fdl_card_form_row_item_btn_link_height">35dp</dimen>
 
     <dimen name="fdl_action_bar_title_left_margin">30dp</dimen>
+
+    <dimen name="fdl_card_form_row_item_checkbox_mark_width">18dp</dimen>
+    <dimen name="fdl_card_form_row_item_checkbox_mark_height">@dimen/fdl_card_form_row_item_checkbox_mark_width</dimen>
 </resources>

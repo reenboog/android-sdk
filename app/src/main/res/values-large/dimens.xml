@@ -34,4 +34,6 @@
     <dimen name="fdl_card_form_btn_link_title_font_size">21sp</dimen>
 
     <dimen name="fdl_card_form_row_item_btn_link_height">53dp</dimen>
+
+    <dimen name="fdl_card_form_row_item_checkbox_mark_width">27dp</dimen>
 </resources>
