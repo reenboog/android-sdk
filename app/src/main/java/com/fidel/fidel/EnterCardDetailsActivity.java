@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import io.card.payment.CardIOActivity;
 
-public class EnterCardDetailsActivity extends AppCompatActivity {
+public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel.OnCardOperationDelegate {
+
+    public static final class FidelServiceAuthorization {
+        private FidelServiceAuthorization() {}
+        public void isAuthorized() {}
+    }
 
     enum LinkButtonType {
         LBT_LINK,
@@ -310,7 +316,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         unblockInput();
 
         //
-        askForCardNumber();
+        askForCardNumberOrAutoScan();
     }
 
     private void setupToolBar() {
@@ -382,6 +388,20 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
         int textLength = cardNumberEditText.getText().length();
         if(textLength != 0) {
             cardNumberEditText.append("");
+        }
+    }
+
+    private void askForCardNumberOrAutoScan() {
+        if(Fidel.autoScan) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showCardIOActivity();
+                }
+            }, 100);
+        } else {
+            askForCardNumber();
         }
     }
 
@@ -470,5 +490,13 @@ public class EnterCardDetailsActivity extends AppCompatActivity {
 
     private void disableTOSCheckbox() {
         setBtnTOSCheckBoxSelected(false);
+    }
+
+    public void onCardLinked(String cardId) {
+        // todo: finish with result
+    }
+
+    public void onFailedToLinkCard(String error) {
+        // todo: toast error
     }
 }
