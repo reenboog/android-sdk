@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
@@ -164,10 +165,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(v == cardNumberEditText && hasFocus) {
-
-
-                    // todo: play animation here
-                    slideCardFormToValue(-50);
+                    setFocusOnCardEditText();
                 }
             }
         });
@@ -179,11 +177,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(v == expiryEditText && hasFocus) {
-
-
-                    // todo: play animation here
-
-                    slideCardFormToValue(-50);
+                    setFocusOnExpiryEditText();
                 }
             }
         });
@@ -303,6 +297,16 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
                 }
 
                 setBtnTOSCheckBoxSelected(!tag);
+            }
+        });
+
+        //
+
+        View mainLayout = findViewById(R.id.fdl_enter_card_details_layout);
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resignAllFirstResponders();
             }
         });
 
@@ -453,11 +457,13 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         ViewTreeObserver.OnGlobalLayoutListener treeListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                int mainHeight = findViewById(R.id.fdl_enter_card_details_layout).getHeight();
+
                 int formHeight = formLayout.getMeasuredHeight();
 
                 int formInitialSize = formHeight + bannerHeight;
 
-                srcParams.topMargin = formInitialSize;
+                srcParams.bottomMargin = mainHeight - formInitialSize;
 
                 guide.setLayoutParams(srcParams);
             }
@@ -467,30 +473,42 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
     }
 
+    private void setFocusOnCardEditText() {
+        int bannerHeight = (int)getResources().getDimension(R.dimen.fdl_banner_height);
+
+        slideCardFormToValue(bannerHeight);
+    }
+
+    private void setFocusOnExpiryEditText() {
+        int bannerHeight = (int)getResources().getDimension(R.dimen.fdl_banner_height);
+
+        slideCardFormToValue((int)(1.5 * bannerHeight));
+    }
+
     private void slideCardFormToValue(int value) {
-//        final ConstraintLayout formLayout = (ConstraintLayout)findViewById(R.id.fdl_card_form_layout);
-//        ConstraintLayout.LayoutParams srcParams = (ConstraintLayout.LayoutParams)formLayout.getLayoutParams();
-//
-//        int startValue = srcParams.topMargin;
-//
-//        ValueAnimator animation = ValueAnimator.ofInt(startValue, value);
-//        animation.setDuration(500);
-//        animation.start();
-//        animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
-//                int animatedValue = (int)updatedAnimation.getAnimatedValue();
-//
-//                ConstraintLayout.LayoutParams constraintLayoutParams = (ConstraintLayout.LayoutParams)formLayout.getLayoutParams();
-//                constraintLayoutParams.topMargin = animatedValue;
-//
-//                formLayout.setLayoutParams(constraintLayoutParams);
-//            }
-//        });
+        final Space guide = (Space)findViewById(R.id.fdl_card_form_guide);
+        ConstraintLayout.LayoutParams srcParams = (ConstraintLayout.LayoutParams)guide.getLayoutParams();
+
+        int startValue = srcParams.height;
+
+        ValueAnimator animation = ValueAnimator.ofInt(startValue, value);
+        animation.setDuration(250);
+        animation.start();
+        animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+                int animatedValue = (int)updatedAnimation.getAnimatedValue();
+
+                ConstraintLayout.LayoutParams constraintLayoutParams = (ConstraintLayout.LayoutParams)guide.getLayoutParams();
+                constraintLayoutParams.height = animatedValue;
+
+                guide.setLayoutParams(constraintLayoutParams);
+            }
+        });
     }
 
     private void slideCardFormBack() {
-        // todo: implement
+        slideCardFormToValue(0);
     }
 
     private void setLinkButtonType(LinkButtonType type) {
@@ -525,6 +543,8 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
                 }
             }
         }
+
+        slideCardFormBack();
 
 //        cardNumberEditText.clearFocus();
 //        expiryEditText.clearFocus();
