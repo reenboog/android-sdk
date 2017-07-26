@@ -20,8 +20,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.lang.ref.WeakReference;
 
 import io.card.payment.CardIOActivity;
 
@@ -257,8 +260,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
                 setLinkButtonType(LinkButtonType.LBT_LOADER);
 
-                // todo: edit click listener
-                Log.d("", "LINKING");
+                linkCardWithCurrentFormData();
             }
         });
 
@@ -492,11 +494,59 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         setBtnTOSCheckBoxSelected(false);
     }
 
-    public void onCardLinked(String cardId) {
-        // todo: finish with result
+    private void linkCardWithCurrentFormData() {
+        String rawCard = cardNumberEditText.getText().toString();
+        rawCard = CreditCardUtil.clean(rawCard);
+
+        String country = countryTextView.getText().toString();
+        String code = CountriesUtil.countryCodeForCountry(country);
+
+        String expiryStr = expiryEditText.getText().toString();
+
+        String monthStr = ExpiryDateUtil.monthStringFromExpiryString(expiryStr);
+        int month = ExpiryDateUtil.monthFromString(monthStr);
+
+        String yearStr = ExpiryDateUtil.yearStringFromExpiryString(expiryStr);
+        int year = ExpiryDateUtil.yearFromString(yearStr);
+        year = ExpiryDateUtil.yearInFourDigitFormat(year);
+
+        WeakReference<EnterCardDetailsActivity> r = new WeakReference<>(this);
+
+        Fidel.linkCard(new FidelServiceAuthorization(), rawCard, month, year, code, r);
+    }
+
+    public void onCardLinked(final String cardId) {
+        Toast.makeText(this, "Card linked", Toast.LENGTH_SHORT).show();
+
+        setLinkButtonType(LinkButtonType.LBT_CHECK);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.putExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID, cardId);
+
+                setResult(Fidel.FIDEL_LINK_CARD_REQUEST_CODE, intent);
+
+                finish();
+            }
+        }, 1000);
     }
 
     public void onFailedToLinkCard(String error) {
-        // todo: toast error
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setBtnTOSCheckBoxSelected(false);
+
+                unblockInput();
+
+                setLinkButtonType(LinkButtonType.LBT_LINK);
+            }
+        }, 1000);
     }
 }
