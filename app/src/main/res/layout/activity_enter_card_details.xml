@@ -44,14 +44,12 @@
             android:background="#ffffff"
             android:id="@+id/fdl_card_form_layout"
             android:layout_width="0dp"
-            android:layout_height="@dimen/fdl_card_form_height"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fdl_card_form_top"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
                 android:id="@+id/fdl_card_form_row_card_number_top_separator"
@@ -327,18 +325,7 @@
 
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_tos_terms_and_item"/>
 
-            <View
-                android:id="@+id/fdl_card_form_row_tos_bottom_separator"
-                style="@style/Divider.Horizontal"
-                android:layout_width="0dp"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginTop="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:ignore="RtlHardcoded" />
+
 
             <ImageView
                 android:id="@+id/fdl_card_form_btn_link_image_view"
@@ -347,14 +334,14 @@
 
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
-                android:layout_marginBottom="@dimen/fdl_card_form_row_item_bottom_spacing"
+                android:layout_marginTop="@dimen/fdl_card_form_row_item_bottom_spacing"
 
                 android:contentDescription="link button"
                 android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_tos_checkbox"
                 app:layout_constraintRight_toRightOf="@id/fdl_card_form_tos_body_item"
 
-                app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_row_tos_bottom_separator"
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_tos_terms_privacy_item"
                 app:srcCompat="@drawable/fdl_btn_link" />
 
             <TextView
@@ -406,6 +393,20 @@
                 app:layout_constraintRight_toRightOf="@id/fdl_card_form_btn_link_image_view"
                 app:layout_constraintTop_toTopOf="@+id/fdl_card_form_btn_link_image_view"
                 app:srcCompat="@drawable/fdl_checkbox_mark" />
+
+            <View
+                android:id="@+id/fdl_card_form_row_tos_bottom_separator"
+                style="@style/Divider.Horizontal"
+                android:layout_width="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="@dimen/fdl_card_form_row_item_bottom_spacing"
+
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_btn_link_image_view"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:ignore="RtlHardcoded" />
 
         </android.support.constraint.ConstraintLayout>
 
