@@ -1,20 +1,25 @@
 package com.fidel.fidel;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.widget.Space;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -162,6 +167,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
 
                     // todo: play animation here
+                    slideCardFormToValue(-50);
                 }
             }
         });
@@ -176,6 +182,8 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
 
                     // todo: play animation here
+
+                    slideCardFormToValue(-50);
                 }
             }
         });
@@ -297,6 +305,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
                 setBtnTOSCheckBoxSelected(!tag);
             }
         });
+
+        //
+        setCardFormBottomGuide();
 
         //
         linkProgress = (ProgressBar)findViewById(R.id.fdl_card_form_btn_link_progress);
@@ -427,6 +438,55 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
                 .positiveText("OK")
                 .negativeText("CANCEL")
                 .show();
+    }
+
+    private void setCardFormBottomGuide() {
+        final Space guide  = (Space)findViewById(R.id.fdl_card_form_guide);
+        final ConstraintLayout.LayoutParams srcParams = (ConstraintLayout.LayoutParams)guide.getLayoutParams();
+
+        final int bannerHeight = (int)getResources().getDimension(R.dimen.fdl_banner_height);
+
+        final ConstraintLayout formLayout = (ConstraintLayout)findViewById(R.id.fdl_card_form_layout);
+
+        final ViewTreeObserver treeObserver = formLayout.getViewTreeObserver();
+
+        ViewTreeObserver.OnGlobalLayoutListener treeListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int formHeight = formLayout.getMeasuredHeight();
+
+                int formInitialSize = formHeight + bannerHeight;
+
+                srcParams.topMargin = formInitialSize;
+
+                guide.setLayoutParams(srcParams);
+            }
+        };
+
+        treeObserver.addOnGlobalLayoutListener(treeListener);
+
+    }
+
+    private void slideCardFormToValue(int value) {
+//        final ConstraintLayout formLayout = (ConstraintLayout)findViewById(R.id.fdl_card_form_layout);
+//        ConstraintLayout.LayoutParams srcParams = (ConstraintLayout.LayoutParams)formLayout.getLayoutParams();
+//
+//        int startValue = srcParams.topMargin;
+//
+//        ValueAnimator animation = ValueAnimator.ofInt(startValue, value);
+//        animation.setDuration(500);
+//        animation.start();
+//        animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator updatedAnimation) {
+//                int animatedValue = (int)updatedAnimation.getAnimatedValue();
+//
+//                ConstraintLayout.LayoutParams constraintLayoutParams = (ConstraintLayout.LayoutParams)formLayout.getLayoutParams();
+//                constraintLayoutParams.topMargin = animatedValue;
+//
+//                formLayout.setLayoutParams(constraintLayoutParams);
+//            }
+//        });
     }
 
     private void slideCardFormBack() {

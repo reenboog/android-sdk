@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         //
         Fidel.programId = "690ae72c-9f9f-4c82-b6be-37285b3dd576";
         Fidel.apiKey = "pk_test_fb56a52e-2f13-4bc1-9e1f-14f4ae7548f6";
-        Fidel.autoScan = true;
+        Fidel.autoScan = false;
 
 
         Button btn = (Button)findViewById(R.id.btn_show);
