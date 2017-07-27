@@ -69,7 +69,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
     TextView countryTextView;
 
     ImageView btnTOSCheckBox;
-    ImageView btnLinkCard;
+    View btnLinkCard;
 
     ImageView bannerImageView;
 
@@ -255,7 +255,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         });
 
         //
-        btnLinkCard = (ImageView)findViewById(R.id.fdl_card_form_btn_link_image_view);
+        btnLinkCard = findViewById(R.id.fdl_card_form_btn_link_image_view);
 
         btnLinkCard.setOnClickListener(new View.OnClickListener() {
             @Override

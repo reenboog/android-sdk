@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fidel.fidel.com.fidel.sdk.EnterCardDetailsActivity">
+    tools:context="com.fidel.sdk.EnterCardDetailsActivity">
 
     <ImageView
         android:id="@+id/fdl_card_form_logo_powered_by_fidel"
@@ -336,10 +336,12 @@
 
 
 
-            <ImageView
+            <View
                 android:id="@+id/fdl_card_form_btn_link_image_view"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/fdl_card_form_row_item_btn_link_height"
+
+                android:background="@drawable/link_card_button"
 
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
@@ -350,8 +352,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/fdl_card_form_tos_checkbox"
                 app:layout_constraintRight_toRightOf="@id/fdl_card_form_tos_body_item"
 
-                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_tos_terms_privacy_item"
-                app:srcCompat="@drawable/fdl_btn_link" />
+                app:layout_constraintTop_toBottomOf="@+id/fdl_card_form_tos_terms_privacy_item" />
 
             <TextView
                 android:id="@+id/fdl_card_form_btn_link_title"
