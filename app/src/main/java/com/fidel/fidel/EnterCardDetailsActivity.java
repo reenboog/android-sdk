@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.constraint.ConstraintLayout;
@@ -16,8 +15,6 @@ import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -49,6 +46,12 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
     private static final int FIDEL_SCAN_REQUEST_CODE = 2343;
 
+    private static  final String TOS_URL = "https://www.google.com";
+    private static  final String TOS_TITLE = "Terms and Conditions";
+
+    private static  final String PRIVACY_URL = "https://www.facebook.com";
+    private static  final String PRIVACY_TITLE = "Privacy Policy";
+
     private CreditCard[] cards = new CreditCard[]{CreditCardUtil.VISA, CreditCardUtil.MASTERCARD, CreditCardUtil.UNKNOWN};
 
     private CreditCardUtil cardUtil = new CreditCardUtil(cards);
@@ -71,6 +74,9 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
     ProgressBar linkProgress;
     ImageView linkMark;
     TextView linkTitle;
+
+    TextView tosTextView;
+    TextView privacyTextView;
 
     View inputBlocker;
 
@@ -311,6 +317,24 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         });
 
         //
+        tosTextView = (TextView)findViewById(R.id.fdl_card_form_tos_terms_item);
+        tosTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWebUrlWithTitle(TOS_URL, TOS_TITLE);
+            }
+        });
+
+        privacyTextView = (TextView)findViewById(R.id.fdl_card_form_tos_terms_privacy_item);
+        privacyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWebUrlWithTitle(PRIVACY_URL, PRIVACY_TITLE);
+            }
+        });
+
+
+        //
         setCardFormBottomGuide();
 
         //
@@ -548,6 +572,15 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
 //        cardNumberEditText.clearFocus();
 //        expiryEditText.clearFocus();
+    }
+
+    public void openWebUrlWithTitle(String url, String title) {
+        Intent intent = new Intent(this, TOSWebViewActivity.class);
+
+        intent.putExtra(TOSWebViewActivity.URL_EXTRAS, url);
+        intent.putExtra(TOSWebViewActivity.TITLE_EXTRAS, title);
+
+        startActivity(intent);
     }
 
     private void blockInput() {
