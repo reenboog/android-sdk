@@ -1,6 +1,7 @@
 package com.fidel.sample;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Fidel.programId = "690ae72c-9f9f-4c82-b6be-37285b3dd576";
         Fidel.apiKey = "pk_test_fb56a52e-2f13-4bc1-9e1f-14f4ae7548f6";
         Fidel.autoScan = false;
+//        Fidel.bannerImage = BitmapFactory.decodeResource(getResources(), R.drawable.fdl_test_banner);
 
 
         Button btn = (Button)findViewById(R.id.btn_show);

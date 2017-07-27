@@ -71,6 +71,8 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
     ImageView btnTOSCheckBox;
     ImageView btnLinkCard;
 
+    ImageView bannerImageView;
+
     ProgressBar linkProgress;
     ImageView linkMark;
     TextView linkTitle;
@@ -346,6 +348,13 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
         //
         inputBlocker = findViewById(R.id.fdl_card_form_input_blocker);
+
+        // apply banner if any
+        bannerImageView = (ImageView)findViewById(R.id.fdl_card_form_banner);
+
+        if(Fidel.bannerImage != null) {
+            bannerImageView.setImageBitmap(Fidel.bannerImage);
+        }
 
         //
 
