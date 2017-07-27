@@ -1,4 +1,4 @@
-package com.fidel.fidel;
+package com.fidel.sdk;
 
 import android.util.Log;
 

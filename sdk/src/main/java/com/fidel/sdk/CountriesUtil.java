@@ -1,4 +1,4 @@
-package com.fidel.fidel;
+package com.fidel.sdk;
 
 /**
  * Created by reenboog on 7/24/17.

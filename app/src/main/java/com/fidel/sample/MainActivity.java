@@ -1,14 +1,13 @@
 package com.fidel.sample;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.fidel.fidel.Fidel;
+import com.fidel.sdk.Fidel;
 import com.fidel.fidel.R;
 
 public class MainActivity extends AppCompatActivity {

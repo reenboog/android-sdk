@@ -1,4 +1,4 @@
-package com.fidel.fidel;
+package com.fidel.sdk;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;

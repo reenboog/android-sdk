@@ -1,16 +1,8 @@
-package com.fidel.fidel;
+package com.fidel.sdk;
 
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
-
-import static com.fidel.fidel.CreditCardUtil.AMERICAN_EXPRESS;
-import static com.fidel.fidel.CreditCardUtil.DINERS_CLUB;
-import static com.fidel.fidel.CreditCardUtil.DISCOVER;
-import static com.fidel.fidel.CreditCardUtil.JCB_15;
-import static com.fidel.fidel.CreditCardUtil.JCB_16;
-import static com.fidel.fidel.CreditCardUtil.MASTERCARD;
-import static com.fidel.fidel.CreditCardUtil.VISA;
 
 /**
  * A {@linkplain android.text.TextWatcher} that will format credit card numbers as the user types
@@ -54,13 +46,13 @@ public class CreditCardTextWatcher implements TextWatcher {
      */
     public CreditCardTextWatcher() {
         this(
-                VISA,
-                MASTERCARD,
-                AMERICAN_EXPRESS,
-                DISCOVER,
-                DINERS_CLUB,
-                JCB_15,
-                JCB_16
+                CreditCardUtil.VISA,
+                CreditCardUtil.MASTERCARD,
+                CreditCardUtil.AMERICAN_EXPRESS,
+                CreditCardUtil.DISCOVER,
+                CreditCardUtil.DINERS_CLUB,
+                CreditCardUtil.JCB_15,
+                CreditCardUtil.JCB_16
         );
     }
 
