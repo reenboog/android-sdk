@@ -16,7 +16,7 @@ Add Fidel dependency
 
 ```java
 dependencies {
-    compile 'com.github.FidelLimited:android-sdk:-SNAPSHOT'
+    compile 'com.github.FidelLimited:android-sdk:1.0.0'
 }
 ```
 ### Sample code
