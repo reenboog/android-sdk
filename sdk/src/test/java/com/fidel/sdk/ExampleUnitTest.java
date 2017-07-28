@@ -88,6 +88,67 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void yearIn2DigitFormat_isCorrect() throws Exception {
+        int y = 2000;
+
+        assertEquals(0, ExpiryDateUtil.yearInTwoDigitFormat(y));
+
+        y = 20;
+
+        assertEquals(20, ExpiryDateUtil.yearInTwoDigitFormat(y));
+
+        y = 2001;
+
+        assertEquals(1, ExpiryDateUtil.yearInTwoDigitFormat(y));
+
+        y = 2099;
+
+        assertEquals(99, ExpiryDateUtil.yearInTwoDigitFormat(y));
+    }
+
+    @Test
+    public void expiryMonth_isCorrect() throws Exception {
+        int m = 12;
+
+        assertEquals(true, ExpiryDateUtil.isExpiryMonthValid(m));
+
+        m = 6;
+
+        assertEquals(true, ExpiryDateUtil.isExpiryMonthValid(m));
+
+        m = 13;
+
+        assertEquals(false, ExpiryDateUtil.isExpiryMonthValid(m));
+
+        m = 0;
+
+        assertEquals(false, ExpiryDateUtil.isExpiryMonthValid(m));
+
+        m = -1;
+
+        assertEquals(false, ExpiryDateUtil.isExpiryMonthValid(m));
+    }
+
+    @Test
+    public void expiryYearIn2DigitFormat_isCorrect() throws Exception {
+        int y = 20;
+
+        assertEquals(true, ExpiryDateUtil.isExpiryYearInTwoDigitFormat(y));
+
+        y = 0;
+
+        assertEquals(true, ExpiryDateUtil.isExpiryYearInTwoDigitFormat(y));
+
+        y = 99;
+
+        assertEquals(true, ExpiryDateUtil.isExpiryYearInTwoDigitFormat(y));
+
+        y = 2020;
+
+        assertEquals(false, ExpiryDateUtil.isExpiryYearInTwoDigitFormat(y));
+    }
+
+    @Test
     public void monthStringFromFormattedExpiryDate_isCorrect() throws Exception {
         String expiry = "01 / 22";
         String month = "01";
