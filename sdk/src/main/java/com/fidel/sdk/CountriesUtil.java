@@ -11,6 +11,7 @@ public class CountriesUtil {
     public static String[] countries() {
         return countries;
     }
+    public static String[] codes() {return codes;}
 
     public static String countryByIndex(int i) {
         if(i < 0 || i >= countries.length) {

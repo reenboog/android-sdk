@@ -208,4 +208,27 @@ public class ExampleUnitTest {
 
         assertEquals(false, result.equals(year));
     }
+
+    @Test
+    public void countriesAndCodesSize_isCorrect() {
+        assertEquals(CountriesUtil.codes().length, CountriesUtil.countries().length);
+    }
+
+    @Test
+    public void countriesIndexing_isCorrect() {
+        assertEquals(null, CountriesUtil.countryByIndex(-1));
+        assertEquals(null, CountriesUtil.countryByIndex(CountriesUtil.countries().length));
+    }
+
+    @Test
+    public void codeForCountry_isCorrect() {
+        assertEquals(true, "GBR".equals(CountriesUtil.countryCodeForCountry("Great Britain")));
+        assertEquals(true, "IRL".equals(CountriesUtil.countryCodeForCountry("Ireland")));
+    }
+
+    @Test
+    public void countryForCode_isCorrect() {
+        assertEquals(true, "Great Britain".equals(CountriesUtil.countryForCountryCode("GBR")));
+        assertEquals(true, "Ireland".equals(CountriesUtil.countryForCountryCode("IRL")));
+    }
 }
