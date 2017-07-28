@@ -27,9 +27,24 @@ public class Fidel {
     private static String API_PROGRAMS = "programs";
     private static String API_CARDS = "cards";
 
+    /**
+     * an optional banner image shown at the top of the form
+     */
     public static Bitmap bannerImage = null;
+
+    /**
+     * when set to true, automatically starts CardIO card scanning activity
+     */
     public static boolean autoScan = false;
+
+    /**
+     * required for a linkCard() call; get it from your dashboard
+     */
     public static String programId = null;
+
+    /**
+     * required for a linkCard() call; get it from your dashboard
+     */
     public static String apiKey = null;
 
     public interface OnCardOperationDelegate {
@@ -156,6 +171,10 @@ public class Fidel {
                     }
                 });
     }
+
+    /**
+     * @param src is just an activity on top of which EnterCardDetails will be shown modally
+     */
 
     public static void present(AppCompatActivity src) {
         Intent intent = new Intent(src, EnterCardDetailsActivity.class);
