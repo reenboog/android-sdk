@@ -19,7 +19,9 @@ public class ExpiryDateUtil {
     public static final String DATE_SPACE = " / ";
     public static final String MONTH_ADDON = "0";
 
-    public static final int MILLENIUM_BASE = 2000;
+    public static int EXPIRY_INCORRECT_DATE = -1;
+
+    public static final int MILLENNIUM_BASE = 2000;
 
     public static boolean isStringInValidFormat(String s) {
         Pattern datePattern = Pattern.compile("(^(0[1-9]|1[0-2]) / ([0-9]?[0-9]?))|(^(0[1-9]|1[0-2]) /?)|(^(0[1-9]?|1[0-2]?)$)");
@@ -64,16 +66,16 @@ public class ExpiryDateUtil {
     }
 
     public static int yearInTwoDigitFormat(int year) {
-        if(year < 100) {
+        if(isExpiryYearInTwoDigitFormat(year)) {
             return year;
         } else {
-            return year % MILLENIUM_BASE;
+            return year % MILLENNIUM_BASE;
         }
     }
 
     public static int yearInFourDigitFormat(int year) {
         if(year < 100) {
-            return year + MILLENIUM_BASE;
+            return year + MILLENNIUM_BASE;
         } else {
             return year;
         }
@@ -104,15 +106,19 @@ public class ExpiryDateUtil {
     }
 
     public static String monthNumericStringForMonth(int m) {
-        String month = "";
-
         if(m < 10) {
-            month = MONTH_ADDON + m;
+            return MONTH_ADDON + m;
         } else {
-            month = "" + m;
+            return "" + m;
         }
+    }
 
-        return month;
+    public static boolean isExpiryYearInTwoDigitFormat(int expYear) {
+        return expYear < 100;
+    }
+
+    public static boolean isExpiryMonthValid(int expMonth) {
+        return expMonth >= 1 && expMonth <= 12;
     }
 
     public static boolean isDateExpired(String s) {

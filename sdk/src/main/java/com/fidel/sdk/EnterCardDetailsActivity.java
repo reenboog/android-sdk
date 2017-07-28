@@ -1,6 +1,7 @@
 package com.fidel.sdk;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -632,9 +633,10 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         int year = ExpiryDateUtil.yearFromString(yearStr);
         year = ExpiryDateUtil.yearInFourDigitFormat(year);
 
-        WeakReference<EnterCardDetailsActivity> r = new WeakReference<>(this);
+        WeakReference<Fidel.OnCardOperationDelegate> delegateRef = new WeakReference<Fidel.OnCardOperationDelegate>(this);
+        WeakReference<AppCompatActivity> activityRef = new WeakReference<AppCompatActivity>(this);
 
-        Fidel.linkCard(new FidelServiceAuthorization(), rawCard, month, year, code, r);
+        Fidel.linkCard(new FidelServiceAuthorization(), rawCard, month, year, code, delegateRef, activityRef);
     }
 
     public void onCardLinked(final String cardId) {

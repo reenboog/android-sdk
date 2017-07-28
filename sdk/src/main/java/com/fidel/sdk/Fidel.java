@@ -1,8 +1,10 @@
 package com.fidel.sdk;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -17,6 +19,7 @@ import java.lang.ref.WeakReference;
  */
 
 public class Fidel {
+    public static final String FIDEL_DEBUG_TAG = "Fidel.DEBUG";
     public static int FIDEL_LINK_CARD_REQUEST_CODE = 1624;
     public static String FIDEL_LINK_CARD_RESULT_CARD_ID = "cardId";
 
@@ -39,22 +42,26 @@ public class Fidel {
                                 int expMonth,
                                 int expYear,
                                 String countryCode,
-                                final WeakReference<EnterCardDetailsActivity> cardDelegate) {
+                                final WeakReference<OnCardOperationDelegate> cardDelegate,
+                                final WeakReference<AppCompatActivity> weakActivity) {
 
         authorization.isAuthorized();
 
         class FidelErrorHandler {
             void fail(final String msg) {
 
-                final EnterCardDetailsActivity delegate = cardDelegate.get();
+                final AppCompatActivity activity = weakActivity.get();
+                final OnCardOperationDelegate delegate = cardDelegate.get();
 
-                Log.d("Fidel.DEBUG", msg);
+                Log.d(FIDEL_DEBUG_TAG, msg);
 
-                if(delegate != null) {
-                    delegate.runOnUiThread(new Runnable() {
+                if(activity != null) {
+                    activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            delegate.onFailedToLinkCard(msg);
+                            if(delegate != null) {
+                                delegate.onFailedToLinkCard(msg);
+                            }
                         }
                     });
                 }
@@ -68,13 +75,13 @@ public class Fidel {
             return;
         }
 
-        if(expMonth < 1 || expMonth > 12) {
+        if(!ExpiryDateUtil.isExpiryMonthValid(expMonth)) {
             onError.fail("Expiry month is incorrect: " + expMonth);
             return;
         }
 
-        if(expYear < ExpiryDateUtil.MILLENIUM_BASE) {
-            onError.fail("Expiry year is expected to be in 4-digit format and > " + ExpiryDateUtil.MILLENIUM_BASE + ".");
+        if(ExpiryDateUtil.isExpiryYearInTwoDigitFormat(expYear)) {
+            onError.fail("Expiry year is expected to be in 4-digit format and > " + ExpiryDateUtil.MILLENNIUM_BASE + ".");
             return;
         }
 
@@ -88,9 +95,7 @@ public class Fidel {
         jsonParams.addProperty("number", card);
         jsonParams.addProperty("termsOfUse", true);
 
-        EnterCardDetailsActivity activity = cardDelegate.get();
-
-        Ion.with(activity)
+        Ion.with(weakActivity.get())
                 .load("POST", urlStr)
                 .setHeader("fidel-key", apiKey)
                 .setHeader("Content-type", "application/json")
@@ -128,13 +133,16 @@ public class Fidel {
                                     final String cardId = jsonItems.get(0).getAsJsonObject().get("id").getAsString();
 
                                     if(cardId != null) {
-                                        final EnterCardDetailsActivity delegate = cardDelegate.get();
+                                        final OnCardOperationDelegate delegate = cardDelegate.get();
+                                        final AppCompatActivity activity = weakActivity.get();
 
-                                        if(delegate != null) {
-                                            delegate.runOnUiThread(new Runnable() {
+                                        if(activity != null) {
+                                            activity.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    delegate.onCardLinked(cardId);
+                                                    if(delegate != null) {
+                                                        delegate.onCardLinked(cardId);
+                                                    }
                                                 }
                                             });
                                         }
@@ -149,8 +157,7 @@ public class Fidel {
                 });
     }
 
-
-    public static void present(Activity src) {
+    public static void present(AppCompatActivity src) {
         Intent intent = new Intent(src, EnterCardDetailsActivity.class);
 
         src.startActivityForResult(intent, FIDEL_LINK_CARD_REQUEST_CODE);
