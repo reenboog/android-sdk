@@ -47,10 +47,10 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
     private static final int FIDEL_SCAN_REQUEST_CODE = 2343;
 
-    private static  final String TOS_URL = "https://www.google.com";
+    private static  final String TOS_URL = "https://fidel.uk/terms";
     private static  final String TOS_TITLE = "Terms and Conditions";
 
-    private static  final String PRIVACY_URL = "https://www.facebook.com";
+    private static  final String PRIVACY_URL = "https://fidel.uk/privacy";
     private static  final String PRIVACY_TITLE = "Privacy Policy";
 
     private CreditCard[] cards = new CreditCard[]{CreditCardUtil.VISA, CreditCardUtil.MASTERCARD, CreditCardUtil.UNKNOWN};
