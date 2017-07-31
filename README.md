@@ -55,4 +55,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 }
 ```
+
+You can customize the topmost banner image:
+
+```java
+Fidel.bannerImage = Bitmap(...);
+```
+
 [![](https://jitpack.io/v/FidelLimited/android-sdk.svg)](https://jitpack.io/#FidelLimited/android-sdk)
