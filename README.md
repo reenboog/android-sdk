@@ -16,7 +16,7 @@ Add Fidel dependency
 
 ```java
 dependencies {
-    compile 'com.github.FidelLimited:android-sdk:1.0.0'
+    compile 'com.github.FidelLimited:android-sdk:1.0.1'
 }
 ```
 ### Sample code
@@ -39,7 +39,7 @@ To automatically start credit card scanning, use:
 Fidel.autoScan = true;
 ```
 
-You can retrieve a cardId, when a card is successfully added:
+You can retrieve a card object, in case a card is successfully added:
 
 ```java
 @Override
@@ -47,10 +47,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 
     if(requestCode == Fidel.FIDEL_LINK_CARD_REQUEST_CODE) {
-        if(data != null && data.hasExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID)) {
-            String cardId = data.getStringExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID);
+        if(data != null && data.hasExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD)) {
+            LinkResult card = (LinkResult)data.getParcelableExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD);
 
-            Log.d("d", "CARD ID = " + cardId);
+            Log.d("d", "CARD ID = " + card.id);
         }
     }
 }
