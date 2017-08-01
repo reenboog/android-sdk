@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference;
 public class Fidel {
     public static final String FIDEL_DEBUG_TAG = "Fidel.DEBUG";
     public static int FIDEL_LINK_CARD_REQUEST_CODE = 1624;
-    public static String FIDEL_LINK_CARD_RESULT_CARD_ID = "cardId";
+    public static String FIDEL_LINK_CARD_RESULT_CARD = "card";
 
     private static String API_ROOT = "https://api.fidel.uk/v1";
     private static String API_PROGRAMS = "programs";
@@ -48,7 +48,7 @@ public class Fidel {
     public static String apiKey = null;
 
     public interface OnCardOperationDelegate {
-        void onCardLinked(String cardId);
+        void onCardLinked(LinkResult resultCard);
         void onFailedToLinkCard(String error);
     }
 
@@ -107,7 +107,7 @@ public class Fidel {
         jsonParams.addProperty("expMonth", expMonth);
         jsonParams.addProperty("expYear", expYear);
         jsonParams.addProperty("countryCode", countryCode);
-        jsonParams.addProperty("number", card);
+        jsonParams.addProperty("number", "4444000000004007");
         jsonParams.addProperty("termsOfUse", true);
 
         Ion.with(weakActivity.get())
@@ -145,9 +145,67 @@ public class Fidel {
                                     onError.fail("No items field found in response");
                                     return;
                                 } else {
-                                    final String cardId = jsonItems.get(0).getAsJsonObject().get("id").getAsString();
+                                    JsonObject cardObj = jsonItems.get(0).getAsJsonObject();
+                                    String cardId = cardObj.get("id").getAsString();
 
                                     if(cardId != null) {
+                                        final LinkResult resultCard = new LinkResult(cardId);
+
+                                        // fill it in here
+                                        if(cardObj.get("created") != null) {
+                                            resultCard.created = cardObj.get("created").getAsString();
+                                        }
+
+                                        if(cardObj.get("updated") != null) {
+                                            resultCard.updated = cardObj.get("updated").getAsString();
+                                        }
+
+                                        if(cardObj.get("type") != null) {
+                                            resultCard.type = cardObj.get("type").getAsString();
+                                        }
+
+                                        if(cardObj.get("scheme") != null) {
+                                            resultCard.scheme = cardObj.get("scheme").getAsString();
+                                        }
+
+                                        if(cardObj.get("programId") != null) {
+                                            resultCard.programId = cardObj.get("programId").getAsString();
+                                        }
+
+                                        if(cardObj.get("mapped") != null) {
+                                            resultCard.mapped = cardObj.get("mapped").getAsBoolean();
+                                        }
+
+                                        if(cardObj.get("live") != null) {
+                                            resultCard.live = cardObj.get("live").getAsBoolean();
+                                        }
+
+                                        if(cardObj.get("lastNumbers") != null) {
+                                            resultCard.lastNumbers = cardObj.get("lastNumbers").getAsString();
+                                        }
+
+                                        if(cardObj.get("expYear") != null) {
+                                            resultCard.expYear = cardObj.get("expYear").getAsInt();
+                                        }
+
+                                        if(cardObj.get("expMonth") != null) {
+                                            resultCard.expMonth = cardObj.get("expMonth").getAsInt();
+                                        }
+
+                                        if(cardObj.get("expDate") != null) {
+                                            resultCard.expDate = cardObj.get("expDate").getAsString();
+                                        }
+
+                                        if(cardObj.get("countryCode") != null) {
+                                            resultCard.countryCode = cardObj.get("countryCode").getAsString();
+                                        }
+
+                                        if(cardObj.get("accountId") != null) {
+                                            resultCard.accountId = cardObj.get("accountId").getAsString();
+                                        }
+
+                                        //
+
                                         final OnCardOperationDelegate delegate = cardDelegate.get();
                                         final AppCompatActivity activity = weakActivity.get();
 
@@ -156,7 +214,7 @@ public class Fidel {
                                                 @Override
                                                 public void run() {
                                                     if(delegate != null) {
-                                                        delegate.onCardLinked(cardId);
+                                                        delegate.onCardLinked(resultCard);
                                                     }
                                                 }
                                             });

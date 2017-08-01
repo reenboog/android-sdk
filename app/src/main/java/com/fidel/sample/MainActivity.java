@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.fidel.sdk.Fidel;
 import com.fidel.fidel.R;
+import com.fidel.sdk.LinkResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == Fidel.FIDEL_LINK_CARD_REQUEST_CODE) {
-            if(data != null && data.hasExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID)) {
-                String cardId = data.getStringExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID);
+            if(data != null && data.hasExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD)) {
+                LinkResult card = (LinkResult)data.getParcelableExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD);
 
-                Log.d("d", "CARD ID = " + cardId);
+                Log.d("d", "CARD ID = " + card.id);
             }
         }
     }

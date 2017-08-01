@@ -639,7 +639,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         Fidel.linkCard(new FidelServiceAuthorization(), rawCard, month, year, code, delegateRef, activityRef);
     }
 
-    public void onCardLinked(final String cardId) {
+    public void onCardLinked(final LinkResult resultCard) {
         Toast.makeText(this, "Card linked", Toast.LENGTH_SHORT).show();
 
         setLinkButtonType(LinkButtonType.LBT_CHECK);
@@ -649,7 +649,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
             @Override
             public void run() {
                 Intent intent = new Intent();
-                intent.putExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD_ID, cardId);
+                intent.putExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD, resultCard);
 
                 setResult(Fidel.FIDEL_LINK_CARD_REQUEST_CODE, intent);
 
