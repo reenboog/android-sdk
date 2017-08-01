@@ -107,7 +107,7 @@ public class Fidel {
         jsonParams.addProperty("expMonth", expMonth);
         jsonParams.addProperty("expYear", expYear);
         jsonParams.addProperty("countryCode", countryCode);
-        jsonParams.addProperty("number", "4444000000004007");
+        jsonParams.addProperty("number", card);
         jsonParams.addProperty("termsOfUse", true);
 
         Ion.with(weakActivity.get())
