@@ -222,13 +222,13 @@ public class ExampleUnitTest {
 
     @Test
     public void codeForCountry_isCorrect() {
-        assertEquals(true, "GBR".equals(CountriesUtil.countryCodeForCountry("Great Britain")));
+        assertEquals(true, "GBR".equals(CountriesUtil.countryCodeForCountry("United Kingdom")));
         assertEquals(true, "IRL".equals(CountriesUtil.countryCodeForCountry("Ireland")));
     }
 
     @Test
     public void countryForCode_isCorrect() {
-        assertEquals(true, "Great Britain".equals(CountriesUtil.countryForCountryCode("GBR")));
+        assertEquals(true, "United Kingdom".equals(CountriesUtil.countryForCountryCode("GBR")));
         assertEquals(true, "Ireland".equals(CountriesUtil.countryForCountryCode("IRL")));
     }
 }

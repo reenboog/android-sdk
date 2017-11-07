@@ -241,7 +241,7 @@
                 android:layout_marginBottom="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
-                android:text="Great Britain"
+                android:text="United Kingdom"
                 app:layout_constraintLeft_toLeftOf="@+id/fdl_card_form_row_country_caption"
                 app:layout_constraintBottom_toBottomOf="@+id/fdl_card_form_expiry_edit_text"
                 app:layout_constraintTop_toTopOf="@+id/fdl_card_form_expiry_edit_text"/>

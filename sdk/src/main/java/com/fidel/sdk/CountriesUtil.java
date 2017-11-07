@@ -5,7 +5,7 @@ package com.fidel.sdk;
  */
 
 public class CountriesUtil {
-    private static String[] countries = {"Great Britain", "Ireland"};
+    private static String[] countries = {"United Kingdom", "Ireland"};
     private static String[] codes = {"GBR", "IRL"};
 
     public static String[] countries() {
