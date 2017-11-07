@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.fidel.sdk.Fidel;
 import com.fidel.fidel.R;
 import com.fidel.sdk.LinkResult;
+import com.google.gson.JsonObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
         Fidel.programId = "690ae72c-9f9f-4c82-b6be-37285b3dd576";
         Fidel.apiKey = "pk_test_fb56a52e-2f13-4bc1-9e1f-14f4ae7548f6";
         Fidel.autoScan = false;
+
+//        JsonObject jsonMeta = new JsonObject();
+//
+//        jsonMeta.addProperty("id", "this-is-the-metadata-id");
+//        jsonMeta.addProperty("customKey1", "customValue1");
+//        jsonMeta.addProperty("customKey2", "customValue2");
+
+//        Fidel.metaData = jsonMeta;
+
 //        Fidel.bannerImage = BitmapFactory.decodeResource(getResources(), R.drawable.fdl_test_banner);
 
 
@@ -44,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 LinkResult card = (LinkResult)data.getParcelableExtra(Fidel.FIDEL_LINK_CARD_RESULT_CARD);
 
                 Log.d("d", "CARD ID = " + card.id);
+
+                JsonObject metaData = card.metaData;
+
+                if(metaData != null) {
+                    Log.d("d", metaData.toString());
+                }
             }
         }
     }

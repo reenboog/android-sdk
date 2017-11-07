@@ -3,6 +3,9 @@ package com.fidel.sdk;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 /**
  * Created by reenboog on 8/1/17.
  */
@@ -29,6 +32,8 @@ public class LinkResult implements Parcelable {
 
     public String countryCode;
     public String accountId;
+
+    public JsonObject metaData;
 
     public LinkResult(String id) {
         this.id = id;
@@ -57,6 +62,14 @@ public class LinkResult implements Parcelable {
 
         countryCode = src.readString();
         accountId = src.readString();
+
+        String metaDataString = src.readString();
+
+        if(metaDataString != null) {
+            JsonParser parser = new JsonParser();
+
+            metaData = parser.parse(metaDataString).getAsJsonObject();
+        }
     }
 
     @Override
@@ -88,6 +101,14 @@ public class LinkResult implements Parcelable {
 
         dest.writeString(countryCode);
         dest.writeString(accountId);
+
+        if(metaData != null) {
+            String metaDataString = metaData.toString();
+
+            if(metaDataString != null) {
+                dest.writeString(metaDataString);
+            }
+        }
     }
 
     public static final Parcelable.Creator<LinkResult> CREATOR = new Parcelable.Creator<LinkResult>() {

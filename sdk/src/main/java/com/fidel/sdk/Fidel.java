@@ -47,6 +47,11 @@ public class Fidel {
      */
     public static String apiKey = null;
 
+    /**
+     * optionally used in linkCard();
+     */
+    public static JsonObject metaData = null;
+
     public interface OnCardOperationDelegate {
         void onCardLinked(LinkResult resultCard);
         void onFailedToLinkCard(String error);
@@ -109,6 +114,10 @@ public class Fidel {
         jsonParams.addProperty("countryCode", countryCode);
         jsonParams.addProperty("number", card);
         jsonParams.addProperty("termsOfUse", true);
+
+        if(metaData != null) {
+            jsonParams.add("metadata", metaData);
+        }
 
         Ion.with(weakActivity.get())
                 .load("POST", urlStr)
@@ -202,6 +211,10 @@ public class Fidel {
 
                                         if(cardObj.get("accountId") != null) {
                                             resultCard.accountId = cardObj.get("accountId").getAsString();
+                                        }
+
+                                        if(cardObj.get("metadata") != null) {
+                                            resultCard.metaData = cardObj.get("metadata").getAsJsonObject();
                                         }
 
                                         //
