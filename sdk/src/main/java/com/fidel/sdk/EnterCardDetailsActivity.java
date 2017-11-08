@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 
 import io.card.payment.CardIOActivity;
@@ -271,7 +272,11 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
 
                 setLinkButtonType(LinkButtonType.LBT_LOADER);
 
-                linkCardWithCurrentFormData();
+                try {
+                    linkCardWithCurrentFormData();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -617,7 +622,7 @@ public class EnterCardDetailsActivity extends AppCompatActivity implements Fidel
         setBtnTOSCheckBoxSelected(false);
     }
 
-    private void linkCardWithCurrentFormData() {
+    private void linkCardWithCurrentFormData() throws UnsupportedEncodingException {
         String rawCard = cardNumberEditText.getText().toString();
         rawCard = CreditCardUtil.clean(rawCard);
 

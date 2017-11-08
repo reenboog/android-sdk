@@ -16,6 +16,10 @@
 #   public *;
 #}
 
+-keep public class com.fidel.sdk.Fidel { public protected *; }
+-keep public class com.fidel.sdk.LinkResult{ public protected *; }
+-keep public class com.fidel.sdk.ExpiryDateUtil{ public protected *; }
+
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable

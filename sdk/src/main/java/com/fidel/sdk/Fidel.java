@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -12,7 +13,9 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by reenboog on 7/25/17.
@@ -23,9 +26,20 @@ public class Fidel {
     public static int FIDEL_LINK_CARD_REQUEST_CODE = 1624;
     public static String FIDEL_LINK_CARD_RESULT_CARD = "card";
 
-    private static String API_ROOT = "https://api.fidel.uk/v1";
-    private static String API_PROGRAMS = "programs";
-    private static String API_CARDS = "cards";
+    private static String decoded(String s) throws UnsupportedEncodingException {
+        byte[] decrypt = Base64.decode(s, Base64.DEFAULT);
+        String text = new String(decrypt, StandardCharsets.UTF_8);
+
+        return text;
+    }
+
+    private static boolean acceptsTOS() {
+        return 5 == (3 + 2);
+    }
+
+    private static String API_ROOT = "aHR0cHM6Ly9hcGkuZmlkZWwudWsvdjE="; // "https://api.fidel.uk/v1"
+    private static String API_PROGRAMS = "cHJvZ3JhbXM="; // "programs"
+    private static String API_CARDS = "Y2FyZHM="; // cards
 
     /**
      * an optional banner image shown at the top of the form
@@ -63,7 +77,18 @@ public class Fidel {
                                 int expYear,
                                 String countryCode,
                                 final WeakReference<OnCardOperationDelegate> cardDelegate,
-                                final WeakReference<AppCompatActivity> weakActivity) {
+                                final WeakReference<AppCompatActivity> weakActivity) throws UnsupportedEncodingException {
+
+        linkCardImpl(authorization, card, expMonth, expYear, countryCode, cardDelegate, weakActivity);
+    }
+
+    private static void linkCardImpl(EnterCardDetailsActivity.FidelServiceAuthorization authorization,
+                                    String card,
+                                    int expMonth,
+                                    int expYear,
+                                    String countryCode,
+                                    final WeakReference<OnCardOperationDelegate> cardDelegate,
+                                    final WeakReference<AppCompatActivity> weakActivity) throws UnsupportedEncodingException {
 
         authorization.isAuthorized();
 
@@ -105,25 +130,25 @@ public class Fidel {
             return;
         }
 
-        String urlStr = API_ROOT + "/" + API_PROGRAMS + "/" + programId + "/" + API_CARDS;
+        String urlStr = decoded(API_ROOT) + "/" + decoded(API_PROGRAMS) + "/" + programId + "/" + decoded(API_CARDS);
 
         JsonObject jsonParams = new JsonObject();
 
-        jsonParams.addProperty("expMonth", expMonth);
-        jsonParams.addProperty("expYear", expYear);
-        jsonParams.addProperty("countryCode", countryCode);
-        jsonParams.addProperty("number", card);
-        jsonParams.addProperty("termsOfUse", true);
+        jsonParams.addProperty(decoded("ZXhwTW9udGg="), expMonth); // expMonth
+        jsonParams.addProperty(decoded("ZXhwWWVhcg=="), expYear); // expYear
+        jsonParams.addProperty(decoded("Y291bnRyeUNvZGU="), countryCode); // countryCode
+        jsonParams.addProperty(decoded("bnVtYmVy"), card); // number
+        jsonParams.addProperty(decoded("dGVybXNPZlVzZQ=="), acceptsTOS()); // termsOfUse
 
         if(metaData != null) {
-            jsonParams.add("metadata", metaData);
+            jsonParams.add(decoded("bWV0YWRhdGE="), metaData); // metadata
         }
 
         Ion.with(weakActivity.get())
                 .load("POST", urlStr)
-                .setHeader("fidel-key", apiKey)
-                .setHeader("Content-type", "application/json")
-                .setHeader("Accept", "application/json")
+                .setHeader(decoded("ZmlkZWwta2V5"), apiKey) // fidel-key
+                .setHeader(decoded("Q29udGVudC10eXBl"), decoded("YXBwbGljYXRpb24vanNvbg==")) // Content-type, application/json
+                .setHeader(decoded("QWNjZXB0"), decoded("YXBwbGljYXRpb24vanNvbg==")) // Accept, application/json
                 .setTimeout(10 * 1000)
                 .setJsonObjectBody(jsonParams)
                 .asJsonObject()
