@@ -1,3 +1,7 @@
+Fidel_compiled
+Fidel_compiled/*
+Fidel_compiled/*.*
+
 *.iml
 .gradle
 /local.properties
